@@ -1,0 +1,397 @@
+[
+  {
+    "destination_id": "CZX",
+    "destination_name": "Changzhou",
+    "hk_express_destination_type": "2nd-Tier-City",
+    "one_line_pitch": "Discover ancient temples, thrilling theme parks, and serene gardens in this historic Yangtze Delta city.",
+    "primary_archetype": "The Intergenerational Culture Hub",
+    "semantic_profile": "Changzhou offers a compelling blend of ancient Chinese heritage and modern family entertainment, a city where the serene, majestic Tianning Temple coexists with the roaring excitement of the China Dinosaurs Park. This duality makes it an ideal destination for travelers who appreciate both cultural depth and lighthearted fun. The city's numerous parks and gardens, like Hongmei Park, provide tranquil escapes that reflect its classical Jiangnan charm, all while being an accessible and manageable city to explore.\n\nThe ideal traveler is a family or multi-generational group looking for a diverse vacation that caters to different interests and ages. They are curious about Chinese history and spirituality but also want premier attractions that will entertain children and teenagers. This visitor appreciates a destination that is less overwhelming than a megacity but still offers a rich tapestry of easily accessible experiences.",
+    "semantic_antiprofile": "Travelers seeking a fast-paced, cosmopolitan metropolis with cutting-edge nightlife and an international luxury shopping scene will likely find Changzhou too relaxed and traditional for their tastes.",
+    "dominant_vibes": [
+      "historic",
+      "family-friendly",
+      "leisurely",
+      "cultural",
+      "traditional",
+      "serene"
+    ],
+    "primary_experience_types": [
+      "theme_parks",
+      "history_culture",
+      "nature_parks",
+      "local_cuisine",
+      "family_fun"
+    ],
+    "cost_index": 2,
+    "logistics_hub_score": 4,
+    "transport_profile": [
+      "high-speed_rail",
+      "metro",
+      "bus",
+      "ride-hailing"
+    ],
+    "planner_memo": "Position Changzhou as a family-friendly alternative or add-on to a Shanghai trip. The China Dinosaurs Park is a key draw for kids, while Tianning Temple appeals to culture seekers. Emphasize its excellent high-speed rail connectivity.",
+    "key_dichotomies": [
+      {
+        "question": "Is your ideal day exploring ancient temples or screaming on a rollercoaster?",
+        "options": [
+          "Temples",
+          "Rollercoasters"
+        ]
+      },
+      {
+        "question": "Are you looking for a quiet cultural getaway or an action-packed family holiday?",
+        "options": [
+          "Quiet Culture",
+          "Family Action"
+        ]
+      }
+    ]
+  },
+  {
+    "destination_id": "ISG",
+    "destination_name": "Ishigaki",
+    "hk_express_destination_type": "Leisure-Resort",
+    "one_line_pitch": "Discover Japan's premier tropical getaway. Ishigaki boasts stunning coral reefs and white-sand beaches, and serves as the perfect hub for exploring the idyllic Yaeyama archipelago.",
+    "primary_archetype": "The Tropical Island-Hopper's Hub",
+    "semantic_profile": "Ishigaki is the heart of the Yaeyama Islands, a subtropical paradise where mainland Japan's frenetic pace feels a world away. Its soul is deeply connected to the sea, from the vibrant coral reefs teeming with life to the laid-back rhythm of island time. This is a place defined by its natural beauty: emerald bays like Kabira, star-shaped sand on Taketomi, and the lush, jungle-clad interiors of Iriomote, all easily accessible. The culture is a unique Ryukyuan blend, distinct from mainland Japan, evident in its music, cuisine, and the warm, unhurried demeanor of its people.\n\nThe ideal visitor to Ishigaki is an ocean lover and a seeker of natural tranquility. They are divers and snorkelers eager to explore world-class coral reefs, beachcombers happy to spend a day on a pristine stretch of sand, and adventurers ready to kayak through mangrove forests. They appreciate a slower pace and are more interested in stunning landscapes and authentic local culture than in bustling nightlife or high-end shopping. This traveler uses Ishigaki as a comfortable base to hop between the more remote and untouched islands of the archipelago.",
+    "semantic_antiprofile": "Travelers seeking a fast-paced urban experience with extensive nightlife, designer shopping, and a wealth of museums will find Ishigaki wanting. The island's charm lies in its natural, tranquil settings, not in metropolitan buzz.\n\nSimilarly, those who prefer all-inclusive luxury mega-resorts with round-the-clock entertainment may find the local, more intimate scale of activities less appealing. This is a destination for active relaxation and nature immersion, not for passive, resort-bound holidays.",
+    "dominant_vibes": [
+      "tropical",
+      "relaxed",
+      "natural",
+      "coastal",
+      "adventurous",
+      "island-hopping"
+    ],
+    "primary_experience_types": [
+      "diving_snorkeling",
+      "beach_relaxation",
+      "island_hopping",
+      "nature_hiking",
+      "local_cuisine",
+      "water_sports"
+    ],
+    "cost_index": 4,
+    "logistics_hub_score": 4,
+    "transport_profile": [
+      "rental_car",
+      "ferry",
+      "bicycle",
+      "local_bus"
+    ],
+    "planner_memo": "Advise clients to rent a car to fully explore Ishigaki island. Emphasize that it's the main ferry hub for the Yaeyama islands, ideal for planning multi-day trips to Iriomote or Taketomi. Pre-booking for popular activities like manta ray diving is highly recommended.",
+    "key_dichotomies": [
+      {
+        "theme": "Pace",
+        "options": [
+          "Relaxed Beach Days",
+          "Active Marine Adventures"
+        ]
+      },
+      {
+        "theme": "Geography",
+        "options": [
+          "Developed Island Hub",
+          "Untouched Natural Outposts"
+        ]
+      },
+      {
+        "theme": "Culture",
+        "options": [
+          "Modern Japanese Convenience",
+          "Traditional Ryukyuan Heritage"
+        ]
+      }
+    ]
+  },
+  {
+    "destination_id": "KMQ",
+    "destination_name": "Komatsu",
+    "hk_express_destination_type": "2nd-Tier-City",
+    "one_line_pitch": "The gateway to Japan's cultural heartland, where samurai districts, exquisite gardens, and renowned artisanship meet the serene natural beauty of the Hokuriku region.",
+    "primary_archetype": "The Cultural Purist's Gateway",
+    "semantic_profile": "Komatsu serves as the welcoming entrance to the Ishikawa Prefecture, a region that embodies a quieter, more refined vision of Japan. This is the Japan of masterful craftsmanship, serene landscapes, and deep-rooted traditions, a world away from the electric energy of Tokyo. The area is anchored by the magnificent city of Kanazawa, often called 'little Kyoto,' where visitors can wander through one of Japan's most beautiful gardens, Kenrokuen, explore the preserved Nagamachi samurai district, and experience the timeless elegance of the Higashi Chaya geisha district.\n\nThe ideal traveler for Komatsu and its surroundings is a connoisseur of culture and beauty. They are drawn to the intricate details of Kutani porcelain, the delicate shimmer of gold leaf crafts, and the innovative exhibitions at the 21st Century Museum of Contemporary Art. This traveler seeks enrichment over excitement, preferring a meditative stroll through a historic garden or a relaxing soak in a Kaga-region onsen to a night of bustling entertainment. They appreciate the slow food movement, savouring fresh seafood from the Sea of Japan and locally-brewed sake, and are eager to explore the rugged coastlines of the Noto Peninsula or the alpine trails of Hakusan National Park.",
+    "semantic_antiprofile": "This destination is not for the thrill-seeker or nightlife enthusiast. Those looking for the high-octane energy, vast shopping complexes, and 24/7 buzz of a megacity like Tokyo or Osaka will find the region's contemplative pace too slow and its attractions too subdued.\n\nTravelers focused on major theme parks, pop culture phenomena, or a party-centric vacation will be disappointed. The region's appeal lies in its cultural depth and natural tranquility, not in adrenaline-pumping activities or vibrant club scenes.",
+    "dominant_vibes": [
+      "cultural",
+      "historic",
+      "serene",
+      "artisanal",
+      "natural",
+      "refined"
+    ],
+    "primary_experience_types": [
+      "History & Heritage",
+      "Cultural Immersion",
+      "Art & Design",
+      "Nature & Outdoors",
+      "Culinary",
+      "Wellness & Onsen"
+    ],
+    "cost_index": 3,
+    "logistics_hub_score": 3,
+    "transport_profile": [
+      "Shinkansen (bullet train)",
+      "Regional buses",
+      "Local trains",
+      "Rental car"
+    ],
+    "planner_memo": "Market KMQ as the accessible entry to the 'other' Japan, an alternative to the crowded Golden Route. Focus on the cultural triangle of Kanazawa, Shirakawa-go, and Takayama. A rental car is highly recommended for exploring the Noto Peninsula and mountain areas effectively.",
+    "key_dichotomies": [
+      {
+        "dichotomy_id": "tradition_vs_modernity",
+        "labels": [
+          "Feudal Tradition",
+          "Contemporary Art"
+        ],
+        "description": "Juxtaposes the perfectly preserved samurai and geisha districts of Kanazawa with the bold, interactive design of its 21st Century Museum of Contemporary Art."
+      },
+      {
+        "dichotomy_id": "urban_vs_rural",
+        "labels": [
+          "Urban Refinement",
+          "Rugged Nature"
+        ],
+        "description": "Contrast the sophisticated elegance of Kanazawa's gardens and tea houses with the wild, dramatic coastline of the Noto Peninsula and the alpine wilderness of Hakusan National Park."
+      },
+      {
+        "dichotomy_id": "craft_vs_nature",
+        "labels": [
+          "Meticulous Craftsmanship",
+          "Raw Elements"
+        ],
+        "description": "Experience the human pursuit of perfection in Kutani ceramics and gold leaf art against the backdrop of the natural resources and landscapes that inspire them."
+      }
+    ]
+  },
+  {
+    "destination_id": "TAK",
+    "destination_name": "Takamatsu",
+    "hk_express_destination_type": "2nd-Tier-City",
+    "one_line_pitch": "Explore Japan's 'Art Islands' from this serene coastal city, home to the magnificent Ritsurin Garden and the country's most famous udon noodles.",
+    "primary_archetype": "The Serene Art Explorer",
+    "semantic_profile": "Takamatsu is the tranquil soul of the Seto Inland Sea. As the main gateway to Shikoku island, this port city offers a calmer, more considered alternative to Japan's bustling metropolises. Its identity is twofold: it is a destination of immense cultural wealth in its own right, boasting the breathtaking Ritsurin Garden, one of Japan's most celebrated historical landscapes, and the stoic ruins of Takamatsu Castle. But it is also the premier launchpad for one of the world's most unique art projects, the 'art islands' of Naoshima, Teshima, and Shodoshima, where contemporary art and nature exist in a stunning, symbiotic relationship.\n\nThe ideal traveler for Takamatsu is a culturally curious soul who prefers quiet contemplation over chaotic energy. They are an art lover, a foodie, and a fan of slow travel, drawn by the promise of island hopping to see works by world-renowned artists set against serene seascapes. This traveler is excited by the pilgrimage to find the perfect bowl of Sanuki udon in its homeland and finds joy in strolling through a perfectly manicured garden or watching ferries glide across the water. They seek a comfortable, convenient, and peaceful base from which to launch their artistic and culinary explorations of the Setouchi region.",
+    "semantic_antiprofile": "Travelers seeking the high-octane energy and endless stimulation of a major global city should look elsewhere. If your vacation checklist includes vibrant nightlife, sprawling shopping districts, and iconic, fast-paced cityscapes like those in Tokyo or Osaka, Takamatsu's quiet, relaxed pace will likely feel underwhelming.\n\nSimilarly, those looking for all-inclusive luxury resorts or adrenaline-pumping activities will not find their fix here. The city's charm lies in its authentic cultural offerings and its role as a peaceful hub, not in theme parks or adventure sports.",
+    "dominant_vibes": [
+      "serene",
+      "arty",
+      "coastal",
+      "foodie",
+      "traditional",
+      "nature-oriented"
+    ],
+    "primary_experience_types": [
+      "Art & Design",
+      "Culinary",
+      "Island Hopping",
+      "Nature & Scenery",
+      "History & Heritage"
+    ],
+    "cost_index": 2,
+    "logistics_hub_score": 4,
+    "transport_profile": [
+      "Ferries",
+      "JR Trains",
+      "Local Buses"
+    ],
+    "planner_memo": "Position Takamatsu as the ideal, tranquil base for exploring the Setouchi art islands (Naoshima, Teshima). Emphasize Ritsurin Garden as a world-class attraction in its own right and leverage the 'Udon Prefecture' fame for culinary hooks. It's a more relaxed and often better-located alternative to Okayama for island hopping.",
+    "key_dichotomies": [
+      {
+        "dichotomy": "Tranquil Base vs. Vibrant Destination",
+        "explanation": "Takamatsu serves primarily as a peaceful and convenient launchpad for regional exploration rather than being a bustling, high-energy destination itself."
+      },
+      {
+        "dichotomy": "Art-Focused vs. General Sightseeing",
+        "explanation": "The city's international draw is strongly tied to the contemporary art scene on the nearby islands and its famous garden, appealing to a specific interest."
+      },
+      {
+        "dichotomy": "Regional Hub vs. Standalone City",
+        "explanation": "Much of its value as a destination is interconnected with its role as a gateway to the broader Setouchi region and Shikoku island."
+      }
+    ]
+  },
+  {
+    "destination_id": "CRK",
+    "destination_name": "Clark",
+    "hk_express_destination_type": "2nd-Tier-City",
+    "one_line_pitch": "Escape to a sprawling resort zone north of Manila, blending American military history with modern casinos, golf courses, water parks, and family-friendly attractions.",
+    "primary_archetype": "The Convenient Leisure Hub",
+    "semantic_profile": "Clark is a city of calculated transformation, a sprawling, orderly enclave carved from the Philippines' largest former U.S. air base. Its wide, clean, American-suburbia-style roads and preserved colonial buildings create a sanitized, spacious atmosphere that stands in stark contrast to the typical Southeast Asian metropolis. Today, it’s a meticulously planned freeport zone—a self-contained world of leisure, commerce, and recreation where everything feels accessible and managed, from championship golf courses to expansive water parks and gleaming casinos.\n\nThe ideal traveler for Clark seeks a convenient, stress-free escape without venturing too far from the capital. They are often families looking for world-class theme parks, groups of friends on a golfing or casino weekend, or business travelers utilizing the area's MICE facilities. This visitor appreciates space, security, and the ease of a resort-style experience where international restaurants, duty-free outlets, and green spaces are all just a short drive away. They trade the chaos of a traditional Filipino city for polished comfort and a unique historical backdrop.",
+    "semantic_antiprofile": "Budget backpackers seeking authentic, spontaneous street-level immersion will find Clark’s curated and car-dependent environment sterile and restrictive. The lack of centralized, walkable districts and limited internal public transport makes it a frustrating destination without a private vehicle or a budget for ride-hailing services.\n\nTravelers yearning for ancient cultural sites or deep dives into pre-colonial Filipino history should also look elsewhere. Clark's heritage is predominantly 20th-century American military, and its modern identity is that of a commercial and leisure hub, lacking the vibrant, traditional markets and historical depth of other Philippine regions.",
+    "dominant_vibes": [
+      "resort-like",
+      "spacious",
+      "family-friendly",
+      "modern",
+      "leisurely",
+      "historical"
+    ],
+    "primary_experience_types": [
+      "family-attractions",
+      "golf",
+      "casino-gaming",
+      "shopping",
+      "historical-sites",
+      "events"
+    ],
+    "cost_index": 3,
+    "logistics_hub_score": 4,
+    "transport_profile": [
+      "private-car",
+      "ride-hailing",
+      "intercity-bus"
+    ],
+    "planner_memo": "Clark is a highly car-dependent destination ideal for families, golfers, and MICE events. Position it as a polished, convenient alternative to Manila. Leverage its proximity to Subic Bay and Mount Pinatubo for multi-day itineraries, and be sure to clarify the stark contrast between the orderly Freeport Zone and the chaotic Angeles City just outside.",
+    "key_dichotomies": [
+      {
+        "aspect": "Urban Fabric",
+        "duality": "Planned Freeport Zone vs. Organic Angeles City"
+      },
+      {
+        "aspect": "Historical Layers",
+        "duality": "American Military Remnants vs. Modern Filipino Development"
+      },
+      {
+        "aspect": "Activity Focus",
+        "duality": "Curated Leisure Parks vs. Nearby Natural Wonders"
+      }
+    ]
+  },
+  {
+    "destination_id": "TAE",
+    "destination_name": "Daegu",
+    "hk_express_destination_type": "2nd-Tier-City",
+    "one_line_pitch": "Discover South Korea's colorful heart, a city where vibrant textile markets and ancient medicinal traditions meet modern urban energy, all nestled within a stunning mountain basin.",
+    "primary_archetype": "The Cultured Urban Explorer's Haven",
+    "semantic_profile": "Daegu, often called 'Colorful Daegu,' is a city of dynamic contrasts and deep-rooted Korean identity. As the country's third-largest metropolis, it hums with an energy that is vibrant yet less overwhelming than Seoul. It is the historic heart of Korea's textile industry, a legacy best explored in the vast Seomun Market, and the epicenter of traditional oriental medicine, centered around the fragrant Yangnyeongsi Market. This is a place where history is not confined to museums but is lived in the modern history alleys and felt in the steam of traditional bathhouses, offering a tangible connection to the nation's past.\n\nThe ideal traveler for Daegu is one who seeks an authentic slice of contemporary Korean life beyond the typical tourist circuit. They are curious explorers, eager to wander through sprawling traditional markets, sip coffee in chic, independent cafes, and hike to serene Buddhist temples on the slopes of Palgongsan Mountain. This traveler appreciates the texture of a real working city—its unique culinary scene, its youthful fashion districts, and its pride in local heritage. They are looking for a destination that offers both urban stimulation and easy access to natural tranquility.",
+    "semantic_antiprofile": "Daegu is not for the traveler seeking iconic, world-famous landmarks or a non-stop, high-octane nightlife scene. Its charms are more subtle and require a bit of exploration to uncover, which may not appeal to those who prefer a checklist-driven holiday.\n\nAdditionally, those who expect a resort-style vacation or a coastal setting will be disappointed, as Daegu is a large, inland city. While it has a modern infrastructure, it may present slightly more of a language barrier than Seoul for those unwilling to step outside the main tourist zones.",
+    "dominant_vibes": [
+      "cultural",
+      "urban",
+      "historic",
+      "foodie",
+      "authentic",
+      "nature-adjacent"
+    ],
+    "primary_experience_types": [
+      "cultural_heritage",
+      "food_and_drink",
+      "shopping",
+      "city_exploration",
+      "nature_and_outdoors"
+    ],
+    "cost_index": 2,
+    "logistics_hub_score": 4,
+    "transport_profile": [
+      "KTX high-speed rail",
+      "Daegu Metro",
+      "local buses",
+      "international airport (TAE)"
+    ],
+    "planner_memo": "Position Daegu as a culturally rich, less-crowded alternative to Seoul, ideal for repeat visitors or those wanting a deeper dive into Korea. Highlight its excellent KTX connectivity for multi-city itineraries. Its unique combination of urban markets, local cuisine, and mountain temples is a key selling point.",
+    "key_dichotomies": [
+      {
+        "title": "Urban Core vs. Mountain Escape",
+        "body": "Experience the bustling energy of downtown markets and cafes, then easily escape to the serene trails and ancient temples of Palgongsan Mountain."
+      },
+      {
+        "title": "Historic Tradition vs. Modern Vibe",
+        "body": "Explore centuries-old oriental medicine markets and historical alleyways, then dive into the city's contemporary cafe culture and youthful fashion scene."
+      },
+      {
+        "title": "Industrial Hub vs. Foodie Haven",
+        "body": "Famous for its vibrant textile industry, Daegu is also a culinary hotspot known for its ten signature local dishes, including makchang gui (grilled abomasum)."
+      }
+    ]
+  },
+  {
+    "destination_id": "HUN",
+    "destination_name": "Hualien",
+    "hk_express_destination_type": "2nd-Tier-City",
+    "one_line_pitch": "Taiwan's rugged east coast gateway, where dramatic marble gorges, scenic coastal drives, and indigenous culture offer a breathtaking escape into pristine nature and outdoor adventure.",
+    "primary_archetype": "The Epic Scenery Gateway",
+    "semantic_profile": "Hualien is a city defined not by its urban core, but by the colossal forces of nature that surround it. Squeezed between the deep blue of the Pacific Ocean and the towering spine of the Central Mountain Range, its soul is one of rugged beauty and quiet resilience. This is the basecamp for Taiwan’s most profound natural wonder, Taroko Gorge, a masterpiece of marble cliffs carved by the Liwu River. The city itself moves at a slower, more deliberate pace than the western metropolises, offering a breath of fresh, sea-salted air. The atmosphere is unpretentious and geared towards the outdoors, a place where the day's main event is a hike through a majestic canyon or a cycle along a stunning coastal path, not a museum visit or a shopping spree.\n\nThe ideal traveler for Hualien is one who feels most alive in the great outdoors. They are adventurers, hikers, photographers, and road-trippers drawn by the promise of awe-inspiring landscapes. They are independent-minded, comfortable renting a scooter to navigate winding mountain roads or joining a small group to trace a river to a hidden waterfall. This traveler values experience over luxury, preferring a hearty meal at a bustling night market to a fine-dining restaurant. They are curious about the rich indigenous Amis culture that permeates the region and are prepared for the unpredictable weather that can sweep in from the Pacific, seeing it as part of the authentic east coast experience.",
+    "semantic_antiprofile": "The urbanite seeking a fast-paced, cosmopolitan holiday will find Hualien lacking. If your travel priorities are high-end shopping, avant-garde dining, vibrant nightlife, and a comprehensive metro system, this city will feel sleepy and underdeveloped. It is a portal to nature's grandeur, not a hub of metropolitan sophistication.\n\nLikewise, travelers who prefer meticulously planned, all-inclusive resort stays with minimal effort may find Hualien challenging. The region's best assets require a degree of self-direction, a willingness to contend with variable weather, and an acceptance that nature, not a concierge, dictates the itinerary.",
+    "dominant_vibes": [
+      "scenic",
+      "nature-focused",
+      "adventurous",
+      "laid-back",
+      "rugged",
+      "outdoorsy"
+    ],
+    "primary_experience_types": [
+      "Nature & Scenery",
+      "Outdoor Adventure",
+      "Road Trips",
+      "Cultural Immersion",
+      "Local Cuisine"
+    ],
+    "cost_index": 2,
+    "logistics_hub_score": 3,
+    "transport_profile": [
+      "Train",
+      "Scooter/Car Rental",
+      "Tour Bus",
+      "Bicycle"
+    ],
+    "planner_memo": "Hualien's primary draw is Taroko National Park; emphasize that pre-booking a private driver or tour is highly recommended, as public transit is limited. Train tickets from Taipei sell out weeks in advance, so early booking is crucial for travelers. The weather is a major factor; always have a backup plan for rainy days.",
+    "key_dichotomies": [
+      {
+        "theme": "Pace",
+        "left": "Rugged Wilderness",
+        "right": "Laid-back City"
+      },
+      {
+        "theme": "Travel Style",
+        "left": "Accessible Gateway",
+        "right": "Independent Exploration"
+      },
+      {
+        "theme": "Scale",
+        "left": "Natural Grandeur",
+        "right": "Local Simplicity"
+      }
+    ]
+  },
+  {
+    "destination_id": "RMQ",
+    "destination_name": "Taichung",
+    "hk_express_destination_type": "2nd-Tier-City",
+    "one_line_pitch": "Discover Taiwan's cultural heart, where a vibrant arts scene, innovative cuisine, and the original bubble tea meet a relaxed urban vibe — the perfect gateway to the island's stunning central mountains.",
+    "primary_archetype": "The Laid-back Cultural Hub",
+    "semantic_profile": "Taichung offers a refreshing counterpoint to the frenetic energy of Taipei. As Taiwan's second city, it breathes with a more relaxed, creative, and spacious rhythm, celebrated for its pleasant climate and burgeoning arts scene. This is the birthplace of bubble tea, a fact that perfectly captures its spirit: playful, innovative, and deeply embedded in modern culture. The city's soul is found not in a dense, historic core, but in its repurposed industrial spaces, architecturally ambitious landmarks like the National Taichung Theater, and the countless independent cafes and design shops that animate its wide boulevards.\n\nThe ideal traveler for Taichung is the culturally curious explorer who prefers a gentler pace of discovery. They are foodies eager to graze through the famous Feng Chia Night Market, cafe-hoppers in search of the perfect brew, and art lovers who appreciate both grand public installations and small, independent galleries. This visitor values authenticity and wants a base to explore the natural wonders of central Taiwan, such as Sun Moon Lake or Cingjing Farm. They are content to navigate the city by bus or taxi, trading the convenience of a vast metro system for a more local, unhurried experience.",
+    "semantic_antiprofile": "Travelers seeking a fast-paced, high-octane metropolis with a world-class, hyper-efficient subway system may find Taichung too sprawling and relaxed. If your travel style is built around a dense checklist of globally recognized landmarks, the city's more subtle, atmospheric charms might feel underwhelming.\n\nFurthermore, those in search of a wild, all-night party scene or a massive international nightlife circuit should look elsewhere. Taichung's evening entertainment is more centered on its famous night markets and cozy bars rather than large-scale nightclubs.",
+    "dominant_vibes": [
+      "relaxed",
+      "arty",
+      "foodie",
+      "creative",
+      "urban",
+      "spacious"
+    ],
+    "primary_experience_types": [
+      "Culinary & Dining",
+      "Arts & Culture",
+      "Urban Exploration",
+      "Local Life & Markets",
+      "Nature & Scenery"
+    ],
+    "cost_index": 2,
+    "logistics_hub_score": 4,
+    "transport_profile": [
+      "High-Speed Rail (HSR)",
+      "Local Bus Network",
+      "Ride-sharing/Taxis",
+      "YouBike Sharing"
+    ],
+    "planner_memo": "Position Taichung as the relaxed, cultural alternative to Taipei, ideal for food lovers and as a strategic hub for exploring central Taiwan. Manage expectations regarding public transport; the MRT is limited, so intra-city travel relies on buses and taxis. Its affordability and role as a gateway to natural attractions are key selling points.",
+    "key_dichotomies": [
+      "Sprawling Metropolis vs. Relaxed Pace",
+      "Urban Arts Scene vs. Gateway to Nature",
+      "Traditional Markets vs. Modernist Architecture",
+      "Global Trend (Bubble Tea) vs. Hyper-Local Vibe"
+    ]
+  }
+]

@@ -1,0 +1,12 @@
+# RAG Engine Dependencies
+# Install with: pip install -r requirements.txt
+
+# Core vector operations
+numpy>=1.24.0,<2.0.0
+
+# Google Gemini API for embeddings
+google-generativeai>=0.3.0,<1.0.0
+
+# Optional: For advanced features
+# scikit-learn>=1.3.0  # For additional similarity metrics
+# faiss-cpu>=1.7.4      # For faster similarity search at scale
