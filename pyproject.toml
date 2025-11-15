@@ -11,6 +11,13 @@ dependencies = [
     "google-cloud-logging>=3.12.0,<4.0.0",
     "google-cloud-aiplatform[evaluation,agent-engines]>=1.118.0,<2.0.0",
     "protobuf>=6.31.1,<7.0.0",
+    "fastapi>=0.95.0,<1.0.0",
+    "uvicorn[standard]>=0.22.0,<1.0.0",
+    # LangChain + provider SDKs for Part 2 dynamic follow-ups
+    "langchain>=1.0.0,<2.0.0",
+    "langchain-core>=1.0.0,<2.0.0",
+    "langchain-openai>=1.0.0,<2.0.0",
+    "openai>=1.0.0,<2.0.0",
 ]
 
 requires-python = ">=3.10,<3.13"

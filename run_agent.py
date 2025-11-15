@@ -2,7 +2,7 @@ import asyncio
 
 from google.adk.runners import Runner
 from google.adk.sessions import InMemorySessionService
-from app.agent import root_agent
+from app.main_agent import root_agent
 from google.genai import types as genai_types
 
 
