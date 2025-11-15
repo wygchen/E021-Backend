@@ -103,6 +103,10 @@ def main():
     # ====================================================================
     # PHASE 2: Display Profile
     # ====================================================================
+    print(f"\n[DEBUG] State keys after Q&A: {list(state.keys())}")
+    print(f"[DEBUG] Has profile: {state.get('user_travel_profile') is not None}")
+    print(f"[DEBUG] Part value: {state.get('part')}")
+    
     if state.get("user_travel_profile"):
         print_section("📝 Your Travel Profile")
         profile = state["user_travel_profile"]
@@ -114,6 +118,13 @@ def main():
         if qa_history:
             avg_hesitation = sum(q.get('hesitation_seconds', 0) for q in qa_history) / len(qa_history)
             print(f"📊 Average response time: {avg_hesitation:.1f}s")
+    else:
+        print("\n[DEBUG] Profile not found. Checking qa_history...")
+        qa_history = state.get("qa_history", [])
+        print(f"[DEBUG] Questions in history: {len(qa_history)}")
+        for i, qa in enumerate(qa_history[:3], 1):
+            print(f"[DEBUG]   Q{i}: {qa.get('question', 'N/A')[:50]}...")
+            print(f"[DEBUG]       A: {qa.get('answer')}, H: {qa.get('hesitation_seconds'):.2f}s")
     
     # ====================================================================
     # PHASE 3: RAG-Powered Planning
