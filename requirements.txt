@@ -1,0 +1,35 @@
+# Backend Dependencies for my-awesome-agent
+# Install with: pip install -r requirements.txt
+
+# Core ADK and Google Cloud dependencies
+google-adk>=1.15.0,<2.0.0
+
+# FastAPI and server dependencies
+fastapi>=0.95.0,<1.0.0
+uvicorn[standard]>=0.22.0,<1.0.0
+pydantic>=2.0.0,<3.0.0
+
+# LangChain for dynamic follow-ups
+langchain>=1.0.0,<2.0.0
+langchain-core>=1.0.0,<2.0.0
+
+# Google Gemini API
+google-generativeai>=0.3.0,<1.0.0
+
+# Data processing
+numpy>=1.24.0,<2.0.0
+
+# Testing dependencies (optional, uncomment if needed)
+# pytest>=8.3.4,<9.0.0
+# pytest-asyncio>=0.23.8,<1.0.0
+# nest-asyncio>=1.6.0,<2.0.0
+
+# Development tools (optional, uncomment if needed)
+# ruff>=0.4.6,<1.0.0
+# mypy>=1.15.0,<2.0.0
+# codespell>=2.2.0,<3.0.0
+# types-pyyaml>=6.0.12.20240917,<7.0.0
+# types-requests>=2.32.0.20240914,<3.0.0
+
+# Jupyter notebook support (optional, uncomment if needed)
+# jupyter>=1.0.0,<2.0.0

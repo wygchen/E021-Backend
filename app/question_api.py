@@ -3,6 +3,7 @@ import time
 from typing import Any, Dict
 
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 from app.question_generator import QuestionGeneratorAgent
@@ -15,11 +16,25 @@ class AnswerPayload(BaseModel):
 
 app = FastAPI(title="Question Generator API")
 
+# Add CORS middleware to allow frontend requests
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # In production, specify exact origins
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 # Simple in-memory session store. Keys are session ids.
 SESSIONS: Dict[str, Dict[str, Any]] = {}
 
 # Instantiate the agent (kept in-process so langchain/LLM objects can be reused per server run)
 agent = QuestionGeneratorAgent()
+
+
+@app.get("/")
+def root():
+    return {"message": "Question Generator API", "status": "running", "docs": "/docs"}
 
 
 @app.post("/session", status_code=201)
