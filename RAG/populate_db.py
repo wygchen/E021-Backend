@@ -293,14 +293,15 @@ def process_entries(entries: List[Dict[str, Any]], keys_to_fill: List[str], prom
                 entry[k] = v
             changed += 1
             print(f"Filled {len(result)} fields for entry {entry.get('destination_id') or entry.get('experience_id')}")
+            
+            # Save immediately after filling each entry
+            if write:
+                print(f"Saving changes to {db_path} immediately...")
+                write_json(db_path, entries)
         else:
             print("No fill produced for this entry (LLM error or parse failure).")
 
-    if changed and write:
-        print(f"Writing changes to {db_path} (changed {changed} entries)")
-        write_json(db_path, entries)
-    else:
-        print(f"Completed; changed {changed} entries. (write={write})")
+    print(f"Completed; changed {changed} entries. (write={write})")
 
 
 def main():

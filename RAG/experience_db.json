@@ -29,7 +29,13 @@
       "Dino-themed lunch voucher"
     ],
     "booking_lead_time_warning": "Recommended to book at least one week in advance, especially during weekends and public holidays, to ensure availability.",
-    "event_details": null,
+    "event_details": {
+      "event_type": "Theme Park Visit",
+      "venue_name": "China Dinosaurland",
+      "operating_hours": "Park hours vary by season and day of the week. It is essential to check the official China Dinosaurland calendar for the specific date of your visit.",
+      "ticket_redemption": "Present your e-voucher at the main park entrance for admission. The skip-the-line pass and lunch voucher are typically redeemed at designated guest service locations or directly at the attraction/restaurant.",
+      "restrictions": "Height, weight, age, and health restrictions apply to many rides, including the 4D roller coaster. Guests are responsible for checking and adhering to all posted safety guidelines at the park."
+    },
     "itinerary_role": "Anchor",
     "itinerary_pitch_text": "Dedicate a full day to prehistoric thrills at China Dinosaurland. This package bundles your entry ticket, a valuable skip-the-line pass for the main roller coaster, and lunch for a seamless, action-packed adventure.",
     "hesitation_analyzer": {
