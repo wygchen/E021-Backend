@@ -198,3 +198,8 @@ my_env.tfvars
 
 # A2A Inspector
 tools/a2a-inspector/
+
+
+# RAG Ingore
+gemini_api.sh
+RAG/*.bak
