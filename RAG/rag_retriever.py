@@ -12,6 +12,8 @@ from pathlib import Path
 from typing import List, Dict, Any, Optional, Tuple
 import numpy as np
 
+from vector_index import VectorIndex
+
 
 class SemanticRetriever:
     """
