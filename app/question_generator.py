@@ -4,6 +4,7 @@ from typing import Any, Dict, List
 from google.adk.agents import BaseAgent
 from google.adk.events import Event
 from google.adk.agents.invocation_context import InvocationContext
+from google.genai import types as genai_types
 
 try:
     from google import genai
@@ -253,6 +254,40 @@ class QuestionGeneratorAgent(BaseAgent):
         return
 
     async def _run_async_impl(self, ctx: InvocationContext):
-        # Maintain compatibility with ADK; use underlying step_state to advance
+        """ADK-compatible async implementation that yields proper events."""
+        # Use underlying step_state to advance the state machine
         self.step_state(ctx.session.state)
-        yield Event(author=self.name)
+        
+        # Now yield an event with the current question or profile
+        state = ctx.session.state
+        
+        # If there's a pending question, yield it as content
+        if state.get("pending_question"):
+            question = state["pending_question"]
+            choices = question.get("choices", [])
+            
+            if len(choices) >= 2:
+                question_text = f"Which do you prefer?\n\nA) {choices[0]}\n\nB) {choices[1]}"
+                
+                yield Event(
+                    author=self.name,
+                    content=genai_types.Content(
+                        role="model",
+                        parts=[genai_types.Part.from_text(text=question_text)]
+                    )
+                )
+        # If profile was just generated, yield it
+        elif state.get("part") == "profile_generated" and state.get("user_travel_profile"):
+            profile = state["user_travel_profile"]
+            yield Event(
+                author=self.name,
+                content=genai_types.Content(
+                    role="model",
+                    parts=[genai_types.Part.from_text(
+                        text=f"✅ Got it! I've analyzed your preferences. Let me find the perfect destinations for you..."
+                    )]
+                )
+            )
+        else:
+            # Default: just signal completion
+            yield Event(author=self.name)
