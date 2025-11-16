@@ -10,6 +10,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 from app.question_generator import QuestionGeneratorAgent
+from app.experience_planner import ExperiencePlanningAgent
 
 # Output directory for session logs
 OUTPUT_DIR = Path(__file__).parent.parent / "output"
@@ -35,8 +36,9 @@ app.add_middleware(
 # Simple in-memory session store. Keys are session ids.
 SESSIONS: Dict[str, Dict[str, Any]] = {}
 
-# Instantiate the agent (kept in-process so langchain/LLM objects can be reused per server run)
-agent = QuestionGeneratorAgent()
+# Instantiate the agents (kept in-process so langchain/LLM objects can be reused per server run)
+question_agent = QuestionGeneratorAgent()
+planner_agent = ExperiencePlanningAgent()
 
 
 @app.on_event("startup")
@@ -71,7 +73,7 @@ def create_session() -> Dict[str, str]:
     }
     
     # Initialize by stepping once so a pending question is set
-    agent.step_state(SESSIONS[sid])
+    question_agent.step_state(SESSIONS[sid])
     
     # Log session creation to file
     log_file = OUTPUT_DIR / f"session_{sid}.txt"
@@ -97,7 +99,7 @@ def get_question(session_id: str):
     if state is None:
         raise HTTPException(status_code=404, detail="session not found")
     # Ensure agent processes current state and sets pending_question
-    agent.step_state(state)
+    question_agent.step_state(state)
     pending = state.get("pending_question")
     if not pending:
         # nothing pending: return profile or summary
@@ -129,7 +131,7 @@ def post_answer(session_id: str, payload: AnswerPayload):
         f.write("\n")
     
     # Advance agent
-    agent.step_state(state)
+    question_agent.step_state(state)
     
     # After stepping, return the new pending question (if any)
     pending = state.get("pending_question")
@@ -184,3 +186,77 @@ def get_state(session_id: str):
     if state is None:
         raise HTTPException(status_code=404, detail="session not found")
     return state
+
+
+@app.post("/session/{session_id}/plan")
+async def generate_plan(session_id: str):
+    """Generate travel plan using Experience Planner agent."""
+    state = SESSIONS.get(session_id)
+    if state is None:
+        raise HTTPException(status_code=404, detail="session not found")
+    
+    # Check if profile exists
+    profile = state.get("user_travel_profile")
+    if not profile:
+        raise HTTPException(status_code=400, detail="No travel profile found. Complete the quiz first.")
+    
+    # Check if plan already exists
+    if state.get("experience_planning_result"):
+        return state.get("experience_planning_result")
+    
+    # Create mock context for the planner
+    from unittest.mock import Mock
+    mock_session = Mock()
+    mock_session.state = state
+    mock_ctx = Mock()
+    mock_ctx.session = mock_session
+    
+    # Run the planner
+    async for event in planner_agent._run_async_impl(mock_ctx):
+        pass  # Let it update state
+    
+    # Get the planning result
+    planning_result = state.get("experience_planning_result", {})
+    
+    # Log planning results to session file
+    log_file = OUTPUT_DIR / f"session_{session_id}.txt"
+    with open(log_file, 'a', encoding='utf-8') as f:
+        f.write("\n" + "="*70 + "\n")
+        f.write("EXPERIENCE PLANNING RESULTS\n")
+        f.write("="*70 + "\n")
+        f.write(f"Timestamp: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+        f.write(f"Status: {planning_result.get('status', 'UNKNOWN')}\n\n")
+        
+        if planning_result.get("status") == "SUCCESS":
+            destinations = planning_result.get("data", [])
+            f.write(f"Destinations Found: {len(destinations)}\n\n")
+            
+            for i, dest in enumerate(destinations, 1):
+                f.write(f"-"*70 + "\n")
+                f.write(f"DESTINATION {i}: {dest.get('name', 'Unknown')}\n")
+                f.write(f"-"*70 + "\n")
+                f.write(f"  Summary: {dest.get('summary', 'N/A')}\n")
+                f.write(f"  Cost Index: {dest.get('cost_index', 'N/A')}/5\n")
+                f.write(f"  Archetype: {dest.get('archetype', 'N/A')}\n\n")
+                
+                experiences = dest.get("experiences", [])
+                if experiences:
+                    f.write(f"  Experiences ({len(experiences)}):\n")
+                    for j, exp in enumerate(experiences, 1):
+                        f.write(f"    {j}. {exp.get('title', 'Unknown')}\n")
+                        f.write(f"       Role: {exp.get('role', 'N/A')}\n")
+                        f.write(f"       Duration: {exp.get('duration', 'N/A')}\n")
+                        f.write(f"       Cost: {exp.get('cost_tier', 'N/A')}\n")
+                        if exp.get('short_description'):
+                            f.write(f"       Description: {exp.get('short_description')[:100]}...\n")
+                        f.write("\n")
+                f.write("\n")
+        else:
+            f.write(f"Reason: {planning_result.get('message', 'No message provided')}\n")
+        
+        f.write("="*70 + "\n\n")
+    
+    print(f"[SESSION] Planning completed for session: {session_id}")
+    print(f"[SESSION] Results saved to: {log_file}")
+    
+    return planning_result
