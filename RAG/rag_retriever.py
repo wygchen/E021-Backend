@@ -15,6 +15,40 @@ import numpy as np
 from vector_index import VectorIndex
 
 
+# ANSI color codes for terminal output
+class Colors:
+    CYAN = '\033[96m'
+    YELLOW = '\033[93m'
+    GREEN = '\033[92m'
+    MAGENTA = '\033[95m'
+    END = '\033[0m'
+
+
+def _format_query_for_display(query: str, max_length: int = 100) -> str:
+    """
+    Format a query string for terminal display.
+    Extracts key preferences if it's a full user profile, otherwise truncates.
+    """
+    # Check if it's a user profile format (contains "User travel profile" or multiple "->")
+    if "User travel profile" in query or query.count("->") > 2:
+        # Extract just the answers (the parts after ->)
+        preferences = []
+        parts = query.split(";")
+        for part in parts[:3]:  # Show first 3 preferences
+            if "->" in part:
+                # Get the answer part
+                answer = part.split("->")[1].strip().split("(")[0].strip()
+                preferences.append(answer)
+        
+        if preferences:
+            return "Preferences: " + ", ".join(preferences) + "..."
+    
+    # Otherwise just truncate
+    if len(query) > max_length:
+        return query[:max_length] + "..."
+    return query
+
+
 class SemanticRetriever:
     """
     Semantic search engine using cosine similarity on pre-built vector indexes.
@@ -173,10 +207,14 @@ class SemanticRetriever:
             # Return just the documents (without scores for cleaner agent input)
             results = [doc for doc, score in results_with_scores]
             
-            # Debug: Print scores
-            print(f"\n🔍 Destination Search Results for: '{query_string}'")
+            # Debug: Print scores with cleaner formatting
+            print(f"\n{Colors.CYAN}🔍 RAG: Destination Search{Colors.END}")
+            display_query = _format_query_for_display(query_string)
+            print(f"   {Colors.YELLOW}{display_query}{Colors.END}")
+            print(f"   {Colors.GREEN}→ Top {len(results_with_scores)} Destinations:{Colors.END}")
             for i, (doc, score) in enumerate(results_with_scores, 1):
-                print(f"  {i}. {doc['destination_name']} (ID: {doc['destination_id']}) - Score: {score:.3f}")
+                score_color = Colors.GREEN if score > 0.5 else Colors.YELLOW if score > 0.4 else Colors.END
+                print(f"      {i}. {doc['destination_name']} ({doc['destination_id']}) - {score_color}Score: {score:.3f}{Colors.END}")
             
             return results
         
@@ -226,11 +264,22 @@ class SemanticRetriever:
         # Return just the documents
         results = [doc for doc, score in results_with_scores]
         
-        # Debug: Print scores
-        destination_filter = f" (filtered to {destination_id})" if destination_id else ""
-        print(f"\n🔍 Experience Search Results for: '{query_string}'{destination_filter}")
+        # Debug: Print scores with cleaner formatting
+        if destination_id:
+            print(f"\n{Colors.MAGENTA}🎯 RAG: Experience Search for {destination_id}{Colors.END}")
+        else:
+            print(f"\n{Colors.MAGENTA}🎯 RAG: Experience Search{Colors.END}")
+        
+        # Format query for display
+        display_query = _format_query_for_display(query_string, max_length=80)
+        print(f"   {Colors.YELLOW}{display_query}{Colors.END}")
+        print(f"   {Colors.GREEN}→ Top {len(results_with_scores)} Experiences:{Colors.END}")
+        
         for i, (doc, score) in enumerate(results_with_scores, 1):
-            print(f"  {i}. {doc['experience_name']} (ID: {doc['experience_id']}) - Score: {score:.3f}")
+            score_color = Colors.GREEN if score > 0.45 else Colors.YELLOW if score > 0.35 else Colors.END
+            exp_name = doc['experience_name']
+            exp_id = doc['experience_id']
+            print(f"      {i}. {exp_name} ({exp_id}) - {score_color}Score: {score:.3f}{Colors.END}")
         
         return results
 

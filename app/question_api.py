@@ -12,6 +12,27 @@ from pydantic import BaseModel
 from app.question_generator import QuestionGeneratorAgent
 from app.experience_planner import ExperiencePlanningAgent
 
+# ANSI color codes for terminal output
+class Colors:
+    GREEN = '\033[92m'
+    YELLOW = '\033[93m'
+    CYAN = '\033[96m'
+    RED = '\033[91m'
+    BOLD = '\033[1m'
+    END = '\033[0m'
+
+def print_info(message: str):
+    """Print INFO message in green."""
+    print(f"{Colors.GREEN}INFO:{Colors.END} {message}")
+
+def print_analysis(message: str):
+    """Print analysis message in yellow with arrow."""
+    print(f"      {Colors.YELLOW}→{Colors.END} {message}")
+
+def print_error(message: str):
+    """Print ERROR message in red."""
+    print(f"{Colors.RED}ERROR:{Colors.END} {message}")
+
 # Output directory for session logs
 OUTPUT_DIR = Path(__file__).parent.parent / "output"
 OUTPUT_DIR.mkdir(exist_ok=True)
@@ -69,11 +90,31 @@ def create_session() -> Dict[str, str]:
         "part": None,
         "session_id": sid,
         "start_time": start_time.isoformat(),
-        "start_timestamp": time.time()
+        "start_timestamp": time.time(),
+        "user_name": "Justin"  # Default user name
     }
     
+    # Console log for demo
+    print("\n" + "="*70)
+    print_info(f"User {SESSIONS[sid]['user_name']} Connected")
+    print("="*70)
+    
     # Initialize by stepping once so a pending question is set
+    print_info("Generating First Question Based on User Background")
     question_agent.step_state(SESSIONS[sid])
+    
+    # Show the first question in terminal
+    pending_q = SESSIONS[sid].get("pending_question", {})
+    if pending_q and isinstance(pending_q, dict):
+        choices = pending_q.get("choices", [])
+        if choices and len(choices) >= 2:
+            first_question = f"{choices[0]} / {choices[1]}"
+            print_info(f"First Question Generated: '{first_question}'")
+        else:
+            print_info("First Question Generated: (preparing choices)")
+    else:
+        print_info("First Question Generated: (pending)")
+    print("="*70)
     
     # Log session creation to file
     log_file = OUTPUT_DIR / f"session_{sid}.txt"
@@ -82,13 +123,11 @@ def create_session() -> Dict[str, str]:
         f.write("HK EXPRESS - TRAVEL PREFERENCE QUIZ SESSION\n")
         f.write("="*70 + "\n")
         f.write(f"Session ID: {sid}\n")
+        f.write(f"User: {SESSIONS[sid]['user_name']}\n")
         f.write(f"Start Time: {start_time.strftime('%Y-%m-%d %H:%M:%S')}\n")
         f.write(f"ISO Time: {start_time.isoformat()}\n")
         f.write("="*70 + "\n\n")
         f.write("Session initialized. Waiting for user responses...\n\n")
-    
-    print(f"[SESSION] Created new session: {sid}")
-    print(f"[SESSION] Log file: {log_file}")
     
     return {"session_id": sid}
 
@@ -113,6 +152,14 @@ def post_answer(session_id: str, payload: AnswerPayload):
     if state is None:
         raise HTTPException(status_code=404, detail="session not found")
     
+    user_name = state.get("user_name", "User")
+    current_question = state.get("pending_question", {}).get("question_text", "")
+    
+    # Console log for demo
+    print("-"*70)
+    print_info(f"{user_name} Selected '{payload.answer}', with hesitation of {payload.hesitation_seconds:.1f}s")
+    print("-"*70)
+    
     # Record submitted answer and time
     state["submitted_answer"] = {
         "answer": payload.answer, 
@@ -125,17 +172,46 @@ def post_answer(session_id: str, payload: AnswerPayload):
     
     with open(log_file, 'a', encoding='utf-8') as f:
         f.write(f"Question #{qa_count}\n")
+        f.write(f"  Question: {current_question}\n")
         f.write(f"  Answer: {payload.answer}\n")
         f.write(f"  Hesitation: {payload.hesitation_seconds:.2f} seconds\n")
         f.write(f"  Timestamp: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
         f.write("\n")
     
     # Advance agent
+    print_info("Generating Next Question Based on Past Results")
+    print_analysis(f"Analyzing {user_name}'s choice: '{payload.answer}'")
+    
+    # Analyze hesitation for insight
+    if payload.hesitation_seconds < 2.0:
+        print_analysis("Quick decision detected - strong preference indicated")
+    elif payload.hesitation_seconds > 5.0:
+        print_analysis("Long hesitation detected - uncertainty or deep consideration")
+    else:
+        print_analysis("Moderate decision time - balanced consideration")
+    
     question_agent.step_state(state)
     
     # After stepping, return the new pending question (if any)
     pending = state.get("pending_question")
     profile = state.get("user_travel_profile")
+    
+    # Show next question or completion status
+    if pending and isinstance(pending, dict):
+        choices = pending.get("choices", [])
+        if choices and len(choices) >= 2:
+            next_q = f"{choices[0]} / {choices[1]}"
+            print_info(f"Next Question Generated: '{next_q}'")
+        else:
+            print_info("Next Question Generated: (preparing choices)")
+        print("-"*70)
+    elif pending:
+        # Pending exists but not in expected format
+        print_info("Next Question Generated: (preparing)")
+        print("-"*70)
+    else:
+        print_info(f"Quiz Complete - Generating Travel Profile for {user_name}")
+        print("-"*70)
     
     # If profile was generated, log it
     if profile and state.get("part") == "profile_generated":
@@ -174,8 +250,13 @@ def post_answer(session_id: str, payload: AnswerPayload):
             f.write("END OF SESSION\n")
             f.write("="*70 + "\n")
         
-        print(f"[SESSION] Quiz completed for session: {session_id}")
-        print(f"[SESSION] Profile saved to: {log_file}")
+        # Console log for profile completion
+        print("="*70)
+        print_info(f"Travel Profile Generated for {user_name}")
+        print_analysis(f"Profile Length: {len(profile)} characters")
+        print_analysis(f"Total Questions Asked: {len(qa_history)}")
+        print_analysis(f"Session Duration: {duration:.1f}s")
+        print("="*70)
     
     return {"pending_question": pending, "user_travel_profile": profile}
 
@@ -195,6 +276,8 @@ async def generate_plan(session_id: str):
     if state is None:
         raise HTTPException(status_code=404, detail="session not found")
     
+    user_name = state.get("user_name", "User")
+    
     # Check if profile exists
     profile = state.get("user_travel_profile")
     if not profile:
@@ -202,7 +285,15 @@ async def generate_plan(session_id: str):
     
     # Check if plan already exists
     if state.get("experience_planning_result"):
+        print_info(f"Returning cached travel plan for {user_name}")
         return state.get("experience_planning_result")
+    
+    # Console log for demo
+    print("="*70)
+    print_info(f"Initiating Experience Planning for {user_name}")
+    print_analysis("Analyzing travel profile...")
+    print_analysis("Matching destinations from knowledge base...")
+    print("="*70)
     
     # Create mock context for the planner
     from unittest.mock import Mock
@@ -212,11 +303,27 @@ async def generate_plan(session_id: str):
     mock_ctx.session = mock_session
     
     # Run the planner
+    print_info("Running Experience Planner Agent...")
     async for event in planner_agent._run_async_impl(mock_ctx):
         pass  # Let it update state
     
     # Get the planning result
     planning_result = state.get("experience_planning_result", {})
+    
+    # Console log results
+    if planning_result.get("status") == "SUCCESS":
+        destinations = planning_result.get("data", [])
+        print_info("Experience Planning Complete!")
+        print_analysis(f"{len(destinations)} destinations recommended")
+        for i, dest in enumerate(destinations, 1):
+            dest_name = dest.get('name', 'Unknown')
+            exp_count = len(dest.get('experiences', []))
+            print_analysis(f"Destination {i}: {dest_name} ({exp_count} experiences)")
+        print("="*70)
+    else:
+        print_error("Experience Planning Failed")
+        print(f"       Reason: {planning_result.get('message', 'Unknown error')}")
+        print("="*70)
     
     # Log planning results to session file
     log_file = OUTPUT_DIR / f"session_{session_id}.txt"
