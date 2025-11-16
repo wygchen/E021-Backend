@@ -8,6 +8,10 @@ __pycache__/
 /out-tsc
 /bazel-out
 
+# Session logs (contains user data)
+output/
+*.txt
+
 # C extensions
 *.so
 

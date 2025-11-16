@@ -75,16 +75,20 @@ class QuestionGeneratorAgent(BaseAgent):
 
     def __init__(self, name: str = "QuestionGeneratorAgent") -> None:
         super().__init__(name=name)
-        # Store Gemini client info for lazy loading
+        # Lazy loading - don't initialize client until first use
         self._gemini_client = None
-        if genai is not None:
-            try:
-                self._gemini_client = genai.Client()
-            except Exception:
-                self._gemini_client = None
+        self._client_initialized = False
 
     def _get_gemini_client(self):
-        """Get the Gemini client instance."""
+        """Get the Gemini client instance with lazy initialization."""
+        if not self._client_initialized:
+            self._client_initialized = True
+            if genai is not None:
+                try:
+                    self._gemini_client = genai.Client()
+                except Exception as e:
+                    print(f"[Q-AGENT] Warning: Could not initialize Gemini client: {e}")
+                    self._gemini_client = None
         return self._gemini_client
 
     def _generate_next_question(self, qa_history: List[Dict[str, Any]]) -> dict:

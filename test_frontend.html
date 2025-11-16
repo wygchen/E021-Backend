@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Question Test</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 8px;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 32px;
+        }
+        .question-box {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+            border-left: 4px solid #667eea;
+        }
+        .question-text {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .question-number {
+            color: #667eea;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .choices {
+            display: flex;
+            gap: 16px;
+            margin-top: 16px;
+        }
+        .choice-btn {
+            flex: 1;
+            padding: 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 15px;
+            color: #333;
+            text-align: left;
+        }
+        .choice-btn:hover {
+            border-color: #667eea;
+            background: #f0f4ff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        }
+        .choice-btn:active {
+            transform: translateY(0);
+        }
+        .choice-label {
+            display: block;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+        .profile-box {
+            background: #e8f5e9;
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 24px;
+            border-left: 4px solid #4caf50;
+        }
+        .profile-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2e7d32;
+            margin-bottom: 16px;
+        }
+        .profile-text {
+            color: #333;
+            line-height: 1.6;
+        }
+        .status {
+            background: #fff3cd;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 16px;
+            border-left: 4px solid #ffc107;
+            font-size: 14px;
+            color: #856404;
+        }
+        .error {
+            background: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+        .success {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+        .stats {
+            display: flex;
+            gap: 16px;
+            margin-top: 16px;
+            padding: 16px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        .stat-item {
+            flex: 1;
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #667eea;
+        }
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            margin-top: 4px;
+        }
+        .reasoning {
+            font-size: 13px;
+            color: #666;
+            font-style: italic;
+            margin-top: 12px;
+            padding: 12px;
+            background: white;
+            border-radius: 8px;
+        }
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 16px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌍 HK Express Travel Preferences</h1>
+        <p class="subtitle">Answer a few quick questions to get personalized travel recommendations</p>
+        
+        <div id="status"></div>
+        <div id="content"></div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:8000';
+        
+        let sessionId = null;
+        let questionStartTime = null;
+        let questionCount = 0;
+        let totalHesitation = 0;
+
+        // Show status message
+        function showStatus(message, type = 'info') {
+            const statusDiv = document.getElementById('status');
+            statusDiv.className = `status ${type}`;
+            statusDiv.textContent = message;
+        }
+
+        // Show loading
+        function showLoading(message = 'Loading...') {
+            document.getElementById('content').innerHTML = `
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <div>${message}</div>
+                </div>
+            `;
+        }
+
+        // Display question
+        function displayQuestion(data) {
+            const question = data.pending_question;
+            
+            if (!question) {
+                // No more questions - show profile
+                if (data.user_travel_profile) {
+                    displayProfile(data.user_travel_profile);
+                } else {
+                    showStatus('No more questions, but no profile generated.', 'error');
+                }
+                return;
+            }
+
+            questionStartTime = Date.now();
+            
+            const contentDiv = document.getElementById('content');
+            contentDiv.innerHTML = `
+                <div class="question-box">
+                    <div class="question-number">Question ${question.question_index}</div>
+                    <div class="question-text">Which do you prefer?</div>
+                    
+                    <div class="choices">
+                        <button class="choice-btn" onclick="submitAnswer('A')">
+                            <span class="choice-label">A</span>
+                            ${question.choices[0]}
+                        </button>
+                        <button class="choice-btn" onclick="submitAnswer('B')">
+                            <span class="choice-label">B</span>
+                            ${question.choices[1]}
+                        </button>
+                    </div>
+                    
+                    ${question.reasoning ? `
+                        <div class="reasoning">
+                            💡 ${question.reasoning}
+                        </div>
+                    ` : ''}
+                </div>
+                
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-value">${questionCount}</div>
+                        <div class="stat-label">Questions Answered</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">${questionCount > 0 ? (totalHesitation / questionCount).toFixed(1) : '0.0'}s</div>
+                        <div class="stat-label">Avg Response Time</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Display profile
+        function displayProfile(profile) {
+            const contentDiv = document.getElementById('content');
+            contentDiv.innerHTML = `
+                <div class="profile-box">
+                    <div class="profile-title">✨ Your Travel Profile</div>
+                    <div class="profile-text">${profile}</div>
+                </div>
+                
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-value">${questionCount}</div>
+                        <div class="stat-label">Total Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">${(totalHesitation / questionCount).toFixed(1)}s</div>
+                        <div class="stat-label">Avg Response Time</div>
+                    </div>
+                </div>
+            `;
+            showStatus('✅ Profile generated successfully!', 'success');
+        }
+
+        // Submit answer
+        async function submitAnswer(answer) {
+            const hesitationSeconds = (Date.now() - questionStartTime) / 1000;
+            questionCount++;
+            totalHesitation += hesitationSeconds;
+
+            showLoading('Processing your answer...');
+            showStatus(`You chose ${answer} (${hesitationSeconds.toFixed(1)}s)`, 'info');
+
+            try {
+                const response = await fetch(`${API_URL}/session/${sessionId}/answer`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        answer: answer,
+                        hesitation_seconds: hesitationSeconds
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+
+                const data = await response.json();
+                
+                // Small delay for better UX
+                setTimeout(() => {
+                    displayQuestion(data);
+                }, 300);
+
+            } catch (error) {
+                showStatus(`❌ Error: ${error.message}`, 'error');
+                console.error('Submit error:', error);
+            }
+        }
+
+        // Initialize session
+        async function init() {
+            showLoading('Creating your session...');
+            showStatus('Connecting to server...', 'info');
+
+            try {
+                // Create session
+                const response = await fetch(`${API_URL}/session`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+
+                const data = await response.json();
+                sessionId = data.session_id;
+
+                showStatus(`✅ Session created: ${sessionId.substring(0, 8)}...`, 'success');
+
+                // Get first question
+                const questionResponse = await fetch(`${API_URL}/session/${sessionId}/question`);
+                const questionData = await questionResponse.json();
+
+                displayQuestion(questionData);
+
+            } catch (error) {
+                showStatus(`❌ Error: ${error.message}. Make sure the backend is running on ${API_URL}`, 'error');
+                document.getElementById('content').innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: #666;">
+                        <h3>Backend Not Running</h3>
+                        <p>Start the backend with:</p>
+                        <code style="background: #f5f5f5; padding: 8px 16px; border-radius: 4px; display: inline-block;">
+                            uvicorn app.question_api:app --reload
+                        </code>
+                    </div>
+                `;
+                console.error('Init error:', error);
+            }
+        }
+
+        // Make submitAnswer available globally
+        window.submitAnswer = submitAnswer;
+
+        // Start when page loads
+        window.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
